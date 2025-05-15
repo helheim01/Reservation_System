@@ -19,6 +19,7 @@ public class Tarifa implements Serializable{
     @Basic
     private int impuestoTarifa;
     private int precioTarifa;
+    @Enumerated(EnumType.STRING)
     private Clase claseTarifa;
     @ManyToOne
     private Vuelo vuelo;

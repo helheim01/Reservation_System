@@ -2,6 +2,7 @@ package com.example.VueloDeBiazi.controller;
 
 import com.example.VueloDeBiazi.entity.Persona;
 import com.example.VueloDeBiazi.repository.RepositoryPersona;
+import com.example.VueloDeBiazi.service.IPersonaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -13,43 +14,36 @@ import java.util.List;
 public class PersonaController {
 
     @Autowired
-    private RepositoryPersona repositoryPersona;
+    private IPersonaService personaService;
 
     // Obtener una persona por ID
-    @GetMapping("persona/{id}")
+    @GetMapping("/persona/{id}")
     public Persona getPersona(@PathVariable Integer id) {
-        return repositoryPersona.findById(id).get();
+        return personaService.getPersonaById(id);
     }
 
     // Obtener todas las personas
-    @GetMapping("personas")
+    @GetMapping("/personas")
     public List<Persona> getPersonas() {
-        return repositoryPersona.findAll();
+        return personaService.getAllPersonas();
     }
 
     // Guardar una persona
     @PostMapping("/guardarPersona")
     public String post(@RequestBody Persona persona) {
-        repositoryPersona.save(persona);
-        return "PERSONA GUARDADA";
+        return personaService.savePersona(persona);
     }
 
     // Editar una persona
     @PutMapping("/editarPersona/{id}")
     public String update(@PathVariable Integer id, @RequestBody Persona persona) {
-        Persona updatePersona = repositoryPersona.findById(id).get();
-        updatePersona.setDni(persona.getDni());
-        updatePersona.setNombre(persona.getNombre());
-        updatePersona.setApellido(persona.getApellido());
-        repositoryPersona.save(updatePersona);
-        return "PERSONA EDITADA CORRECTAMENTE";
+        return personaService.updatePersona(id, persona);
     }
 
     // Eliminar una persona
     @DeleteMapping("/eliminarPersona/{id}")
     public String delete(@PathVariable Integer id) {
-        Persona deletePersona = repositoryPersona.findById(id).get();
-        repositoryPersona.delete(deletePersona);
-        return "PERSONA ELIMINADA";
+        return personaService.deletePersona(id);
     }
 }
+

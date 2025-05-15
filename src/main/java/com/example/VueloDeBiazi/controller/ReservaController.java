@@ -2,6 +2,7 @@ package com.example.VueloDeBiazi.controller;
 
 import com.example.VueloDeBiazi.entity.Reserva;
 import com.example.VueloDeBiazi.repository.RepositoryReserva;
+import com.example.VueloDeBiazi.service.IReservaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -13,43 +14,36 @@ import java.util.List;
 public class ReservaController {
 
     @Autowired
-    private RepositoryReserva repositoryReserva;
+    private IReservaService reservaService;
 
     // Obtener una reserva por ID
-    @GetMapping("reserva/{id}")
+    @GetMapping("/reserva/{id}")
     public Reserva getReserva(@PathVariable Integer id) {
-        return repositoryReserva.findById(id).get();
+        return reservaService.getReservaById(id);
     }
 
     // Obtener todas las reservas
-    @GetMapping("reservas")
+    @GetMapping("/reservas")
     public List<Reserva> getReservas() {
-        return repositoryReserva.findAll();
+        return reservaService.getAllReservas();
     }
 
     // Guardar una reserva
     @PostMapping("/guardarReserva")
     public String post(@RequestBody Reserva reserva) {
-        repositoryReserva.save(reserva);
-        return "RESERVA GUARDADA";
+        return reservaService.saveReserva(reserva);
     }
 
     // Editar una reserva
     @PutMapping("/editarReserva/{id}")
     public String update(@PathVariable Integer id, @RequestBody Reserva reserva) {
-        Reserva updateReserva = repositoryReserva.findById(id).get();
-        updateReserva.setPago(reserva.getPago());
-        updateReserva.setVuelo(reserva.getVuelo());
-
-        repositoryReserva.save(updateReserva);
-        return "RESERVA EDITADA CORRECTAMENTE";
+        return reservaService.updateReserva(id, reserva);
     }
 
     // Eliminar una reserva
     @DeleteMapping("/eliminarReserva/{id}")
     public String delete(@PathVariable Integer id) {
-        Reserva deleteReserva = repositoryReserva.findById(id).get();
-        repositoryReserva.delete(deleteReserva);
-        return "RESERVA ELIMINADA";
+        return reservaService.deleteReserva(id);
     }
 }
+

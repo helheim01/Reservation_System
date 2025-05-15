@@ -2,6 +2,7 @@ package com.example.VueloDeBiazi.controller;
 
 import com.example.VueloDeBiazi.entity.Asiento;
 import com.example.VueloDeBiazi.repository.RepositoryAsiento;
+import com.example.VueloDeBiazi.service.IAsientoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -13,44 +14,35 @@ import java.util.List;
 public class AsientoController {
 
     @Autowired
-    private RepositoryAsiento repositoryAsiento;
+    private IAsientoService asientoService;
 
     // Obtener asiento por ID
-    @GetMapping("asiento/{id}")
+    @GetMapping("/asiento/{id}")
     public Asiento getAsiento(@PathVariable Integer id) {
-        return repositoryAsiento.findById(id).get();
+        return asientoService.getAsientoById(id);
     }
 
     // Obtener todos los asientos
-    @GetMapping("asientos")
+    @GetMapping("/asientos")
     public List<Asiento> getAsientos() {
-        return repositoryAsiento.findAll();
+        return asientoService.getAllAsientos();
     }
 
     // Guardar un asiento
     @PostMapping("/guardarAsiento")
     public String post(@RequestBody Asiento asiento) {
-        repositoryAsiento.save(asiento);
-        return "ASIENTO GUARDADO";
+        return asientoService.saveAsiento(asiento);
     }
 
     // Editar asiento
     @PutMapping("/editarAsiento/{id}")
     public String update(@PathVariable Integer id, @RequestBody Asiento asiento) {
-        Asiento updateAsiento = repositoryAsiento.findById(id).get();
-        updateAsiento.setFilaAsiento(asiento.getFilaAsiento());
-        updateAsiento.setLetraAsiento(asiento.getLetraAsiento());
-        updateAsiento.setClase(asiento.getClase());
-        updateAsiento.setAvion(asiento.getAvion());
-        repositoryAsiento.save(updateAsiento);
-        return "ASIENTO EDITADO CORRECTAMENTE";
+        return asientoService.updateAsiento(id, asiento);
     }
 
     // Eliminar asiento
     @DeleteMapping("/eliminarAsiento/{id}")
     public String delete(@PathVariable Integer id) {
-        Asiento deleteAsiento = repositoryAsiento.findById(id).get();
-        repositoryAsiento.delete(deleteAsiento);
-        return "ASIENTO ELIMINADO";
+        return asientoService.deleteAsiento(id);
     }
 }

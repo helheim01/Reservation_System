@@ -2,6 +2,7 @@ package com.example.VueloDeBiazi.controller;
 
 import com.example.VueloDeBiazi.entity.Piloto;
 import com.example.VueloDeBiazi.repository.RepositoryPiloto;
+import com.example.VueloDeBiazi.service.IPilotoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -13,44 +14,36 @@ import java.util.List;
 public class PilotoController {
 
     @Autowired
-    private RepositoryPiloto repositoryPiloto;
+    private IPilotoService pilotoService;
 
     // Obtener un piloto por ID
-    @GetMapping("piloto/{id}")
+    @GetMapping("/piloto/{id}")
     public Piloto getPiloto(@PathVariable Integer id) {
-        return repositoryPiloto.findById(id).get();
+        return pilotoService.getPilotoById(id);
     }
 
     // Obtener todos los pilotos
-    @GetMapping("pilotos")
+    @GetMapping("/pilotos")
     public List<Piloto> getPilotos() {
-        return repositoryPiloto.findAll();
+        return pilotoService.getAllPilotos();
     }
 
     // Guardar un piloto
     @PostMapping("/guardarPiloto")
     public String post(@RequestBody Piloto piloto) {
-        repositoryPiloto.save(piloto);
-        return "PILOTO GUARDADO";
+        return pilotoService.savePiloto(piloto);
     }
 
     // Editar un piloto
     @PutMapping("/editarPiloto/{id}")
     public String update(@PathVariable Integer id, @RequestBody Piloto piloto) {
-        Piloto updatePiloto = repositoryPiloto.findById(id).get();
-        updatePiloto.setDni(piloto.getDni());
-        updatePiloto.setNombre(piloto.getNombre());
-        updatePiloto.setApellido(piloto.getApellido());
-        updatePiloto.setNumeroPiloto(piloto.getNumeroPiloto());
-        repositoryPiloto.save(updatePiloto);
-        return "PILOTO EDITADO CORRECTAMENTE";
+        return pilotoService.updatePiloto(id, piloto);
     }
 
     // Eliminar un piloto
     @DeleteMapping("/eliminarPiloto/{id}")
     public String delete(@PathVariable Integer id) {
-        Piloto deletePiloto = repositoryPiloto.findById(id).get();
-        repositoryPiloto.delete(deletePiloto);
-        return "PILOTO ELIMINADO";
+        return pilotoService.deletePiloto(id);
     }
 }
+

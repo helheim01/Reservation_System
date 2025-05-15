@@ -11,13 +11,15 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-
-public class Persona implements Serializable {
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+@DiscriminatorColumn(name = "tipo_persona")
+public abstract class Persona {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    private int id;
+    private Long id;
     @Basic
-    protected double dni;
-    protected String nombre;
-    protected String apellido;
+    private String dni;
+    private String nombre;
+    private String apellido;
+
 }

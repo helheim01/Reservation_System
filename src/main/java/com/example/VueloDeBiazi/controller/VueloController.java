@@ -2,6 +2,7 @@ package com.example.VueloDeBiazi.controller;
 
 import com.example.VueloDeBiazi.entity.Vuelo;
 import com.example.VueloDeBiazi.repository.RepositoryVuelo;
+import com.example.VueloDeBiazi.service.IVueloService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -13,47 +14,36 @@ import java.util.List;
 public class VueloController {
 
     @Autowired
-    private RepositoryVuelo repositoryVuelo;
+    private IVueloService vueloService;
 
     // Obtener un vuelo por ID
-    @GetMapping("vuelo/{id}")
+    @GetMapping("/vuelo/{id}")
     public Vuelo getVuelo(@PathVariable Integer id) {
-        return repositoryVuelo.findById(id).get();
+        return vueloService.getVueloById(id);
     }
 
     // Obtener todos los vuelos
-    @GetMapping("vuelos")
+    @GetMapping("/vuelos")
     public List<Vuelo> getVuelos() {
-        return repositoryVuelo.findAll();
+        return vueloService.getAllVuelos();
     }
 
     // Guardar un vuelo
     @PostMapping("/guardarVuelo")
     public String post(@RequestBody Vuelo vuelo) {
-        repositoryVuelo.save(vuelo);
-        return "VUELO GUARDADO";
+        return vueloService.saveVuelo(vuelo);
     }
 
     // Editar un vuelo
     @PutMapping("/editarVuelo/{id}")
     public String update(@PathVariable Integer id, @RequestBody Vuelo vuelo) {
-        Vuelo updateVuelo = repositoryVuelo.findById(id).get();
-        updateVuelo.setAvion(vuelo.getAvion());
-        updateVuelo.setAeropuertos(vuelo.getAeropuertos());
-        updateVuelo.setPiloto(vuelo.getPiloto());
-        updateVuelo.setFecha(vuelo.getFecha());
-        updateVuelo.setAerolinea(vuelo.getAerolinea());
-        updateVuelo.setTarifas(vuelo.getTarifas());
-
-        repositoryVuelo.save(updateVuelo);
-        return "VUELO EDITADO CORRECTAMENTE";
+        return vueloService.updateVuelo(id, vuelo);
     }
 
     // Eliminar un vuelo
     @DeleteMapping("/eliminarVuelo/{id}")
     public String delete(@PathVariable Integer id) {
-        Vuelo deleteVuelo = repositoryVuelo.findById(id).get();
-        repositoryVuelo.delete(deleteVuelo);
-        return "VUELO ELIMINADO";
+        return vueloService.deleteVuelo(id);
     }
 }
+

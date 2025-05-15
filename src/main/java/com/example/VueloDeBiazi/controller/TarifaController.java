@@ -2,6 +2,7 @@ package com.example.VueloDeBiazi.controller;
 
 import com.example.VueloDeBiazi.entity.Tarifa;
 import com.example.VueloDeBiazi.repository.RepositoryTarifa;
+import com.example.VueloDeBiazi.service.ITarifaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -13,45 +14,36 @@ import java.util.List;
 public class TarifaController {
 
     @Autowired
-    private RepositoryTarifa repositoryTarifa;
+    private ITarifaService tarifaService;
 
     // Obtener una tarifa por ID
-    @GetMapping("tarifa/{id}")
+    @GetMapping("/tarifa/{id}")
     public Tarifa getTarifa(@PathVariable Integer id) {
-        return repositoryTarifa.findById(id).get();
+        return tarifaService.getTarifaById(id);
     }
 
     // Obtener todas las tarifas
-    @GetMapping("tarifas")
+    @GetMapping("/tarifas")
     public List<Tarifa> getTarifas() {
-        return repositoryTarifa.findAll();
+        return tarifaService.getAllTarifas();
     }
 
     // Guardar una tarifa
     @PostMapping("/guardarTarifa")
     public String post(@RequestBody Tarifa tarifa) {
-        repositoryTarifa.save(tarifa);
-        return "TARIFA GUARDADA";
+        return tarifaService.saveTarifa(tarifa);
     }
 
     // Editar una tarifa
     @PutMapping("/editarTarifa/{id}")
     public String update(@PathVariable Integer id, @RequestBody Tarifa tarifa) {
-        Tarifa updateTarifa = repositoryTarifa.findById(id).get();
-        updateTarifa.setImpuestoTarifa(tarifa.getImpuestoTarifa());
-        updateTarifa.setPrecioTarifa(tarifa.getPrecioTarifa());
-        updateTarifa.setClaseTarifa(tarifa.getClaseTarifa());
-        updateTarifa.setVuelo(tarifa.getVuelo());
-
-        repositoryTarifa.save(updateTarifa);
-        return "TARIFA EDITADA CORRECTAMENTE";
+        return tarifaService.updateTarifa(id, tarifa);
     }
 
     // Eliminar una tarifa
     @DeleteMapping("/eliminarTarifa/{id}")
     public String delete(@PathVariable Integer id) {
-        Tarifa deleteTarifa = repositoryTarifa.findById(id).get();
-        repositoryTarifa.delete(deleteTarifa);
-        return "TARIFA ELIMINADA";
+        return tarifaService.deleteTarifa(id);
     }
 }
+

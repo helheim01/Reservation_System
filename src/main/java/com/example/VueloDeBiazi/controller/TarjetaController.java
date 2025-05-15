@@ -2,6 +2,7 @@ package com.example.VueloDeBiazi.controller;
 
 import com.example.VueloDeBiazi.entity.Tarjeta;
 import com.example.VueloDeBiazi.repository.RepositoryTarjeta;
+import com.example.VueloDeBiazi.service.ITarjetaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -13,44 +14,36 @@ import java.util.List;
 public class TarjetaController {
 
     @Autowired
-    private RepositoryTarjeta repositoryTarjeta;
+    private ITarjetaService tarjetaService;
 
     // Obtener una tarjeta por ID
-    @GetMapping("tarjeta/{id}")
+    @GetMapping("/tarjeta/{id}")
     public Tarjeta getTarjeta(@PathVariable Integer id) {
-        return repositoryTarjeta.findById(id).get();
+        return tarjetaService.getTarjetaById(id);
     }
 
     // Obtener todas las tarjetas
-    @GetMapping("tarjetas")
+    @GetMapping("/tarjetas")
     public List<Tarjeta> getTarjetas() {
-        return repositoryTarjeta.findAll();
+        return tarjetaService.getAllTarjetas();
     }
 
     // Guardar una tarjeta
     @PostMapping("/guardarTarjeta")
     public String post(@RequestBody Tarjeta tarjeta) {
-        repositoryTarjeta.save(tarjeta);
-        return "TARJETA GUARDADA";
+        return tarjetaService.saveTarjeta(tarjeta);
     }
 
     // Editar una tarjeta
     @PutMapping("/editarTarjeta/{id}")
     public String update(@PathVariable Integer id, @RequestBody Tarjeta tarjeta) {
-        Tarjeta updateTarjeta = repositoryTarjeta.findById(id).get();
-        updateTarjeta.setNumeroTarjeta(tarjeta.getNumeroTarjeta());
-        updateTarjeta.setTipoTarjeta(tarjeta.getTipoTarjeta());
-        updateTarjeta.setCantidadPago(tarjeta.getCantidadPago());  // Heredado de Pago
-
-        repositoryTarjeta.save(updateTarjeta);
-        return "TARJETA EDITADA CORRECTAMENTE";
+        return tarjetaService.updateTarjeta(id, tarjeta);
     }
 
     // Eliminar una tarjeta
     @DeleteMapping("/eliminarTarjeta/{id}")
     public String delete(@PathVariable Integer id) {
-        Tarjeta deleteTarjeta = repositoryTarjeta.findById(id).get();
-        repositoryTarjeta.delete(deleteTarjeta);
-        return "TARJETA ELIMINADA";
+        return tarjetaService.deleteTarjeta(id);
     }
 }
+

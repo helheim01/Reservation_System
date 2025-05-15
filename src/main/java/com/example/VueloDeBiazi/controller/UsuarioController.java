@@ -1,7 +1,11 @@
 package com.example.VueloDeBiazi.controller;
 
+import com.example.VueloDeBiazi.entity.Consulta;
+import com.example.VueloDeBiazi.entity.Reserva;
+import com.example.VueloDeBiazi.entity.Tarjeta;
 import com.example.VueloDeBiazi.entity.Usuario;
 import com.example.VueloDeBiazi.repository.RepositoryUsuario;
+import com.example.VueloDeBiazi.service.IUsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -13,50 +17,35 @@ import java.util.List;
 public class UsuarioController {
 
     @Autowired
-    private RepositoryUsuario repositoryUsuario;
+    private IUsuarioService usuarioService;
 
     // Obtener un usuario por ID
-    @GetMapping("usuario/{id}")
+    @GetMapping("/usuario/{id}")
     public Usuario getUsuario(@PathVariable Integer id) {
-        return repositoryUsuario.findById(id).get();
+        return usuarioService.getUsuarioById(id);
     }
 
     // Obtener todos los usuarios
-    @GetMapping("usuarios")
+    @GetMapping("/usuarios")
     public List<Usuario> getUsuarios() {
-        return repositoryUsuario.findAll();
+        return usuarioService.getAllUsuarios();
     }
 
     // Guardar un usuario
     @PostMapping("/guardarUsuario")
     public String post(@RequestBody Usuario usuario) {
-        repositoryUsuario.save(usuario);
-        return "USUARIO GUARDADO";
+        return usuarioService.saveUsuario(usuario);
     }
 
     // Editar un usuario
     @PutMapping("/editarUsuario/{id}")
     public String update(@PathVariable Integer id, @RequestBody Usuario usuario) {
-        Usuario updateUsuario = repositoryUsuario.findById(id).get();
-        updateUsuario.setDni(usuario.getDni());
-        updateUsuario.setNombre(usuario.getNombre());
-        updateUsuario.setApellido(usuario.getApellido());
-        updateUsuario.setNumeroUsuario(usuario.getNumeroUsuario());
-        updateUsuario.setContraseñaUsuario(usuario.getContraseñaUsuario());
-        updateUsuario.setCorreoElectronicoUsuario(usuario.getCorreoElectronicoUsuario());
-        updateUsuario.setTarjetas(usuario.getTarjetas());
-        updateUsuario.setConsultas(usuario.getConsultas());
-        updateUsuario.setReservas(usuario.getReservas());
-
-        repositoryUsuario.save(updateUsuario);
-        return "USUARIO EDITADO CORRECTAMENTE";
+        return usuarioService.updateUsuario(id, usuario);
     }
 
     // Eliminar un usuario
     @DeleteMapping("/eliminarUsuario/{id}")
     public String delete(@PathVariable Integer id) {
-        Usuario deleteUsuario = repositoryUsuario.findById(id).get();
-        repositoryUsuario.delete(deleteUsuario);
-        return "USUARIO ELIMINADO";
+        return usuarioService.deleteUsuario(id);
     }
 }

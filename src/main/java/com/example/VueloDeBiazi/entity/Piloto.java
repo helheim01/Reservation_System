@@ -11,6 +11,7 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
+@DiscriminatorValue("Piloto")
 public class Piloto extends Persona implements Serializable{
     @Basic
     private int numeroPiloto;

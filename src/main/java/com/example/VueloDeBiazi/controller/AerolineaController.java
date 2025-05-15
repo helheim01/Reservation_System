@@ -1,56 +1,43 @@
 package com.example.VueloDeBiazi.controller;
+
 import com.example.VueloDeBiazi.entity.Aerolinea;
-import com.example.VueloDeBiazi.repository.RepositoryAerolinea;
+import com.example.VueloDeBiazi.service.AerolineaServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("/aerolineas")
-@CrossOrigin(origins = "http://localhost:8080")  // Ajustar la URL si es necesario
-
+@CrossOrigin(origins = "http://localhost:8080")
 public class AerolineaController {
+
     @Autowired
-    private RepositoryAerolinea repositoryAerolinea;
+    private AerolineaServiceImpl aerolineaService;
 
-    // Obtener Aerolinea por ID
-    @GetMapping("aerolinea/{id}")
+    @GetMapping("/aerolinea/{id}")
     public Aerolinea getAerolinea(@PathVariable Integer id) {
-        return repositoryAerolinea.findById(id).get();
+        return aerolineaService.getAerolineaById(id);
     }
 
-    // Obtener todos los Aerolineas
-    @GetMapping("aerolineas")
+    @GetMapping("/aerolineas")
     public List<Aerolinea> getAerolineas() {
-        return repositoryAerolinea.findAll();
+        return aerolineaService.getAllAerolineas();
     }
 
-    // Guardar Aerolinea
-    @PostMapping("guardarAerolinea")
+    @PostMapping("/guardarAerolinea")
     public String post(@RequestBody Aerolinea aerolinea) {
-        repositoryAerolinea.save(aerolinea);
-        return "AEROLINEA GUARDADA";
+        return aerolineaService.saveAerolinea(aerolinea);
     }
 
-    // Editar Articulo
-    @PutMapping("editarAerolinea/{id}")
-    public String uptdate(@PathVariable Integer id, @RequestBody Aerolinea aerolinea) {
-        Aerolinea uptdateAerolinea = repositoryAerolinea.findById(id).get();
-        uptdateAerolinea.setNombreAerolinea(aerolinea.getNombreAerolinea());
-        repositoryAerolinea.save(uptdateAerolinea);
-
-        return "AEROLINEA EDITADO CORRECTAMENTE";
+    @PutMapping("/editarAerolinea/{id}")
+    public String update(@PathVariable Integer id, @RequestBody Aerolinea aerolinea) {
+        return aerolineaService.updateAerolinea(id, aerolinea);
     }
 
-    // Eliminar Articulo
-    @DeleteMapping("deleteAerolinea/{id}")
+    @DeleteMapping("/deleteAerolinea/{id}")
     public String delete(@PathVariable Integer id) {
-        Aerolinea deleteAerolinea = repositoryAerolinea.findById(id).get();
-        repositoryAerolinea.delete(deleteAerolinea);
-
-        return "AEROLINEA ELIMINADA";
+        return aerolineaService.deleteAerolinea(id);
     }
-
 }
+

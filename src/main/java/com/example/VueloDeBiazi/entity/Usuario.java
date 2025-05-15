@@ -14,7 +14,7 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-
+@DiscriminatorValue("Usuario")
 public class Usuario extends Persona implements Serializable {
     private int numeroUsuario;
     private String contraseñaUsuario;

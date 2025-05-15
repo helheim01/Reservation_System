@@ -2,6 +2,7 @@ package com.example.VueloDeBiazi.controller;
 
 import com.example.VueloDeBiazi.entity.Pago;
 import com.example.VueloDeBiazi.repository.RepositoryPago;
+import com.example.VueloDeBiazi.service.IPagoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -13,41 +14,35 @@ import java.util.List;
 public class PagoController {
 
     @Autowired
-    private RepositoryPago repositoryPago;
+    private IPagoService pagoService;
 
     // Obtener un pago por ID
-    @GetMapping("pago/{id}")
+    @GetMapping("/pago/{id}")
     public Pago getPago(@PathVariable Integer id) {
-        return repositoryPago.findById(id).get();
+        return pagoService.getPagoById(id);
     }
 
     // Obtener todos los pagos
-    @GetMapping("pagos")
+    @GetMapping("/pagos")
     public List<Pago> getPagos() {
-        return repositoryPago.findAll();
+        return pagoService.getAllPagos();
     }
 
     // Guardar un pago
     @PostMapping("/guardarPago")
     public String post(@RequestBody Pago pago) {
-        repositoryPago.save(pago);
-        return "PAGO GUARDADO";
+        return pagoService.savePago(pago);
     }
 
     // Editar un pago
     @PutMapping("/editarPago/{id}")
     public String update(@PathVariable Integer id, @RequestBody Pago pago) {
-        Pago updatePago = repositoryPago.findById(id).get();
-        updatePago.setCantidadPago(pago.getCantidadPago());
-        repositoryPago.save(updatePago);
-        return "PAGO EDITADO CORRECTAMENTE";
+        return pagoService.updatePago(id, pago);
     }
 
     // Eliminar un pago
     @DeleteMapping("/eliminarPago/{id}")
     public String delete(@PathVariable Integer id) {
-        Pago deletePago = repositoryPago.findById(id).get();
-        repositoryPago.delete(deletePago);
-        return "PAGO ELIMINADO";
+        return pagoService.deletePago(id);
     }
 }
