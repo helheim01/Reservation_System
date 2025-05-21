@@ -24,9 +24,8 @@ public class ReservaServiceImpl implements IReservaService {
     }
 
     @Override
-    public String saveReserva(Reserva reserva) {
-        repositoryReserva.save(reserva);
-        return "RESERVA GUARDADA";
+    public Reserva saveReserva(Reserva reserva) {
+        return repositoryReserva.save(reserva);
     }
 
     @Override

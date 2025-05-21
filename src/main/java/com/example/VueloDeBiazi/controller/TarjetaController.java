@@ -30,7 +30,7 @@ public class TarjetaController {
 
     // Guardar una tarjeta
     @PostMapping("/guardarTarjeta")
-    public String post(@RequestBody Tarjeta tarjeta) {
+    public Tarjeta post(@RequestBody Tarjeta tarjeta) {
         return tarjetaService.saveTarjeta(tarjeta);
     }
 

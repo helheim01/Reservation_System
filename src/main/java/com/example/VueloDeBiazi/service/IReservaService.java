@@ -7,7 +7,7 @@ import java.util.List;
 public interface IReservaService {
     Reserva getReservaById(Integer id);
     List<Reserva> getAllReservas();
-    String saveReserva(Reserva reserva);
+    Reserva saveReserva(Reserva reserva);
     String updateReserva(Integer id, Reserva reserva);
     String deleteReserva(Integer id);
 }

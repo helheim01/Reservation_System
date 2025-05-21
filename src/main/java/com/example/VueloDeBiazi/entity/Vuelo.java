@@ -17,8 +17,8 @@ import lombok.Setter;
 
 public class Vuelo {
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    private int numeroVuelo;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id;
     @OneToOne
     private Avion avion;
     @OneToMany

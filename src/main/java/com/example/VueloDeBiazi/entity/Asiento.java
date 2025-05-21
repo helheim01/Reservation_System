@@ -14,7 +14,7 @@ import lombok.Setter;
 
 public class Asiento implements Serializable {
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     @Basic
     private int filaAsiento;

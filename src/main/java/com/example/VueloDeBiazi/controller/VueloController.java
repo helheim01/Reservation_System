@@ -45,5 +45,18 @@ public class VueloController {
     public String delete(@PathVariable Integer id) {
         return vueloService.deleteVuelo(id);
     }
+
+    @GetMapping("/filtrar")
+    public List<Vuelo> filtrarVuelos(
+            @RequestParam Integer ciudad,
+            @RequestParam Integer aerolinea
+    ) {
+        return vueloService.findByCiudadAndAerolinea(ciudad, aerolinea);
+    }
+
+    @GetMapping("/vuelo/{id}/asientos")
+    public List<String> getAsientosByVuelo(@PathVariable("id") Integer vueloId) {
+        return vueloService.getAsientosByVueloId(vueloId);
+    }
 }
 

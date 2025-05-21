@@ -1,11 +1,14 @@
 package com.example.VueloDeBiazi.service;
 
+import com.example.VueloDeBiazi.entity.Asiento;
 import com.example.VueloDeBiazi.entity.Vuelo;
 import com.example.VueloDeBiazi.repository.RepositoryVuelo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class VueloServiceImpl implements IVueloService {
@@ -53,5 +56,24 @@ public class VueloServiceImpl implements IVueloService {
             return "VUELO ELIMINADO";
         }
         return "NO EXISTE EL VUELO CON ESE ID";
+    }
+
+    @Override
+    public List<Vuelo> findByCiudadAndAerolinea(Integer ciudadId, Integer aerolineaId) {
+        return repositoryVuelo.findByCiudadAndAerolinea(ciudadId, aerolineaId);
+    }
+
+    @Override
+    public List<String> getAsientosByVueloId(Integer vueloId) {
+        Vuelo vuelo = repositoryVuelo.findById(vueloId).orElse(null);
+        if (vuelo == null || vuelo.getAvion() == null) {
+            return Collections.emptyList();
+        }
+        // Mapear cada Asiento a su número (suponiendo getter getNumero())
+        List<Asiento> asientos = vuelo.getAvion().getAsientos();
+        return asientos.stream()
+                .map(a -> String.valueOf(a.getLetraAsiento()))
+                .collect(Collectors.toList());
+
     }
 }

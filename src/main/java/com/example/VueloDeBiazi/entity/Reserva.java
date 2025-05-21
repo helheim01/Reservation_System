@@ -14,8 +14,8 @@ import lombok.Setter;
 
 public class Reserva implements Serializable{
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    private int numeroReserva;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id;
     @OneToOne
     private Pago pago;
     @OneToOne

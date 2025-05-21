@@ -24,16 +24,14 @@ public class UsuarioServiceImpl implements IUsuarioService {
     }
 
     @Override
-    public String saveUsuario(Usuario usuario) {
-        repositoryUsuario.save(usuario);
-        return "USUARIO GUARDADO";
+    public Usuario saveUsuario(Usuario u) {
+        return repositoryUsuario.save(u);          // devuelve la entidad guardada con id
     }
 
     @Override
     public String updateUsuario(Integer id, Usuario usuario) {
         Usuario existente = repositoryUsuario.findById(id).orElse(null);
         if (existente != null) {
-            existente.setNumeroUsuario(usuario.getNumeroUsuario());
             existente.setContraseñaUsuario(usuario.getContraseñaUsuario());
             existente.setCorreoElectronicoUsuario(usuario.getCorreoElectronicoUsuario());
             existente.setTarjetas(usuario.getTarjetas());

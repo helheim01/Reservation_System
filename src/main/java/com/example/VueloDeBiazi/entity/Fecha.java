@@ -15,7 +15,7 @@ import lombok.Setter;
 
 public class Fecha implements Serializable{
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     @Temporal(TemporalType.DATE)
     private Date fecha;

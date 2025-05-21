@@ -7,7 +7,7 @@ import java.util.List;
 public interface IUsuarioService {
     Usuario getUsuarioById(Integer id);
     List<Usuario> getAllUsuarios();
-    String saveUsuario(Usuario usuario);
+    Usuario saveUsuario(Usuario u);
     String updateUsuario(Integer id, Usuario usuario);
     String deleteUsuario(Integer id);
 }

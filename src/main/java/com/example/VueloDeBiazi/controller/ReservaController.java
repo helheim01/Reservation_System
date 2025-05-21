@@ -30,7 +30,7 @@ public class ReservaController {
 
     // Guardar una reserva
     @PostMapping("/guardarReserva")
-    public String post(@RequestBody Reserva reserva) {
+    public Reserva post(@RequestBody Reserva reserva) {
         return reservaService.saveReserva(reserva);
     }
 

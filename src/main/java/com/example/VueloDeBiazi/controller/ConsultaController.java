@@ -30,7 +30,7 @@ public class ConsultaController {
 
     // Guardar una consulta
     @PostMapping("/guardarConsulta")
-    public String post(@RequestBody Consulta consulta) {
+    public Consulta post(@RequestBody Consulta consulta) {
         return consultaService.saveConsulta(consulta);
     }
 

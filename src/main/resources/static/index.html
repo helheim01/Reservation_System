@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="formbold-main-wrapper">
+  <div class="formbold-form-wrapper">
+    <form action="https://formbold.com/s/FORM_ID" method="POST">
+      <div class="formbold-steps">
+        <ul>
+          <li class="formbold-step-menu1 active">
+            <span>1</span>
+            Consulta
+          </li>
+          <li class="formbold-step-menu2">
+            <span>2</span>
+            Registro
+          </li>
+          <li class="formbold-step-menu3">
+            <span>3</span>
+            Confirmación
+          </li>
+          
+        </ul>
+      </div>
+
+      <div class="formbold-form-step-1 active">
+        <div class="formbold-input-flex">
+          <div>
+            <label for="ciudad" class="formbold-form-label">Ciudad</label>
+            <select id="ciudad" name="ciudad" class="formbold-form-input">
+              <option value="">Seleccione una ciudad</option>
+            </select>
+          </div>
+
+          <div>
+            <label for="aerolinea" class="formbold-form-label">Aerolínea</label>
+            <select id="aerolinea" name="aerolinea" class="formbold-form-input">
+              <option value="">Seleccione una aerolínea</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="formbold-input-flex">
+          <div>
+            <label for="vuelo" class="formbold-form-label">Vuelo</label>
+            <select id="vuelo" name="vuelo" class="formbold-form-input">
+              <option value="">Seleccione un vuelo</option>
+            </select>
+          </div>
+
+          <div>
+            <label for="asiento" class="formbold-form-label">Asiento</label>
+            <select id="asiento" name="asiento" class="formbold-form-input">
+              <option value="">Seleccione un asiento</option>
+            </select>
+          </div>
+        </div>
+      </div>
+
+      <div class="formbold-form-step-2">
+        <div class="formbold-input-flex">
+          <div>
+            <label for="firstname" class="formbold-form-label">Nombre</label>
+            <input
+              type="text"
+              name="firstname"
+              placeholder="Andrio"
+              id="firstname"
+              class="formbold-form-input"
+            />
+          </div>
+          <div>
+            <label for="lastname" class="formbold-form-label">Apellido</label>
+            <input
+              type="text"
+              name="lastname"
+              placeholder="Dolee"
+              id="lastname"
+              class="formbold-form-input"
+            />
+          </div>
+          <div>
+            <label for="dni" class="formbold-form-label">DNI</label>
+            <input
+              type="text"
+              name="dni"
+              id="dni"
+              placeholder="12345678"
+              class="formbold-form-input"
+            />
+          </div>
+        </div>
+
+        <div class="formbold-input-flex">
+          <div>
+            <label for="email" class="formbold-form-label">Email</label>
+            <input
+              type="email"
+              name="email"
+              placeholder="example@mail.com"
+              id="email"
+              class="formbold-form-input"
+            />
+          </div>
+          <div>
+            <label for="password" class="formbold-form-label">Contraseña</label>
+            <input
+              type="password"
+              name="password"
+              placeholder="password"
+              id="password"
+              class="formbold-form-input"
+            />
+          </div>
+        </div>
+      </div>
+
+      <div class="formbold-form-step-3">
+        <div class="formbold-form-confirm">
+          <div class="formbold-input-flex">
+            <div>
+              <label for="cardNumber" class="formbold-form-label">Número de Tarjeta</label>
+              <input
+                type="text"
+                name="cardNumber"
+                id="cardNumber"
+                placeholder="1234 5678 9012 3456"
+                class="formbold-form-input"
+              />
+            </div>
+            <div>
+              <label for="cardType" class="formbold-form-label">Tipo de Tarjeta</label>
+              <select name="cardType" id="cardType" class="formbold-form-input">
+                <option value="">Seleccionar tipo</option>
+                <option value="DEBITO">Débito</option>
+                <option value="CREDITO">Crédito</option>
+              </select>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="formbold-form-btn-wrapper">
+        <button type="button" class="formbold-back-btn">
+          Back
+        </button>
+
+        <button type="submit" class="formbold-btn">
+          Next Step
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <g clip-path="url(#clip0_1675_1807)">
+              <path d="M10.7814 7.33312L7.20541 3.75712L8.14808 2.81445L13.3334 7.99979L8.14808 13.1851L7.20541 12.2425L10.7814 8.66645H2.66675V7.33312H10.7814Z" fill="white"/>
+            </g>
+            <defs>
+              <clipPath id="clip0_1675_1807">
+                <rect width="16" height="16" fill="white"/>
+              </clipPath>
+            </defs>
+          </svg>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
+
+
+
+
+<script src="script.js"></script>
+</body>
+</html>

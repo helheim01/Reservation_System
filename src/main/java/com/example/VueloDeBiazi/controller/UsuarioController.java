@@ -33,7 +33,7 @@ public class UsuarioController {
 
     // Guardar un usuario
     @PostMapping("/guardarUsuario")
-    public String post(@RequestBody Usuario usuario) {
+    public Usuario post(@RequestBody Usuario usuario) {
         return usuarioService.saveUsuario(usuario);
     }
 

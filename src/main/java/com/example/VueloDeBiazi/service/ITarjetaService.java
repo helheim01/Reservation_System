@@ -6,7 +6,7 @@ import java.util.List;
 public interface ITarjetaService {
     Tarjeta getTarjetaById(Integer id);
     List<Tarjeta> getAllTarjetas();
-    String saveTarjeta(Tarjeta tarjeta);
+    Tarjeta saveTarjeta(Tarjeta tarjeta);
     String updateTarjeta(Integer id, Tarjeta tarjeta);
     String deleteTarjeta(Integer id);
 }

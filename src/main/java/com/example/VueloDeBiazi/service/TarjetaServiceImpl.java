@@ -24,9 +24,8 @@ public class TarjetaServiceImpl implements ITarjetaService {
     }
 
     @Override
-    public String saveTarjeta(Tarjeta tarjeta) {
-        repositoryTarjeta.save(tarjeta);
-        return "TARJETA GUARDADA";
+    public Tarjeta saveTarjeta(Tarjeta tarjeta) {
+        return repositoryTarjeta.save(tarjeta);
     }
 
     @Override
@@ -35,7 +34,7 @@ public class TarjetaServiceImpl implements ITarjetaService {
         if (existente != null) {
             existente.setNumeroTarjeta(tarjeta.getNumeroTarjeta());
             existente.setTipoTarjeta(tarjeta.getTipoTarjeta());
-            existente.setCantidadPago(tarjeta.getCantidadPago()); // Heredado de Pago
+            existente.setMonto(tarjeta.getMonto()); // Heredado de Pago
             repositoryTarjeta.save(existente);
             return "TARJETA EDITADA";
         }

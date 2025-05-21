@@ -14,8 +14,8 @@ import lombok.Setter;
 
 public class Tarifa implements Serializable{
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    private int numeroTarifa;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id;
     @Basic
     private int impuestoTarifa;
     private int precioTarifa;

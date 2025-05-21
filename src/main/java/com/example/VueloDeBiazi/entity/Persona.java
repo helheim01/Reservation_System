@@ -15,7 +15,7 @@ import lombok.Setter;
 @DiscriminatorColumn(name = "tipo_persona")
 public abstract class Persona {
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @Basic
     private String dni;

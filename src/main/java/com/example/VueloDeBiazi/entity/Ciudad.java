@@ -14,7 +14,7 @@ import lombok.Setter;
 
 public class Ciudad implements Serializable{
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     @Basic
     private String nombreCiudad;

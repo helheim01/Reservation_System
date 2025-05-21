@@ -14,7 +14,7 @@ import lombok.Setter;
 
 public class Consulta implements Serializable{
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     @OneToOne
     private Vuelo vuelo;

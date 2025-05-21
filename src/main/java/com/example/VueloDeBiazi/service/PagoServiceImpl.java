@@ -33,7 +33,7 @@ public class PagoServiceImpl implements IPagoService {
     public String updatePago(Integer id, Pago pago) {
         Pago existente = repositoryPago.findById(id).orElse(null);
         if (existente != null) {
-            existente.setCantidadPago(pago.getCantidadPago());
+            existente.setMonto(pago.getMonto());
             repositoryPago.save(existente);
             return "PAGO EDITADO";
         }

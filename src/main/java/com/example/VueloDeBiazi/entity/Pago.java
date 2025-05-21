@@ -14,8 +14,8 @@ import lombok.Setter;
 
 public class Pago implements Serializable{
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    private int numeroPago;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id;
     @Basic
-    private double cantidadPago;
+    private double monto;
 }

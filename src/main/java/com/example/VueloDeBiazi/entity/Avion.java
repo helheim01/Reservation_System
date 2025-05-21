@@ -17,7 +17,7 @@ import lombok.Setter;
 
 public class Avion implements Serializable, Especificacion {
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int numeroAvion;
 
     @OneToMany(mappedBy = "avion", cascade = CascadeType.PERSIST, orphanRemoval = true)

@@ -24,9 +24,8 @@ public class ConsultaServiceImpl implements IConsultaService {
     }
 
     @Override
-    public String saveConsulta(Consulta consulta) {
-        repositoryConsulta.save(consulta);
-        return "CONSULTA GUARDADA";
+    public Consulta saveConsulta(Consulta consulta) {
+        return repositoryConsulta.save(consulta);
     }
 
     @Override

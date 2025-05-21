@@ -14,7 +14,7 @@ import lombok.Setter;
 
 public class Aeropuerto implements Serializable {
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     @Basic
     private String nombreAeropuerto;

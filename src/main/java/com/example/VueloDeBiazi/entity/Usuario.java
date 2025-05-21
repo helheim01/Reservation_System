@@ -16,7 +16,6 @@ import lombok.Setter;
 @Entity
 @DiscriminatorValue("Usuario")
 public class Usuario extends Persona implements Serializable {
-    private int numeroUsuario;
     private String contraseñaUsuario;
     private String correoElectronicoUsuario;
     @OneToMany

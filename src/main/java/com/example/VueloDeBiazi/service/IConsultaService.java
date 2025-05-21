@@ -7,7 +7,7 @@ import java.util.List;
 public interface IConsultaService {
     Consulta getConsultaById(Integer id);
     List<Consulta> getAllConsultas();
-    String saveConsulta(Consulta consulta);
+    Consulta saveConsulta(Consulta consulta);
     String updateConsulta(Integer id, Consulta consulta);
     String deleteConsulta(Integer id);
 }
