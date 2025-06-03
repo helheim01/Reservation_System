@@ -1,6 +1,6 @@
 package com.example.VueloDeBiazi.service;
 
-import com.example.VueloDeBiazi.entity.Reserva;
+import com.example.VueloDeBiazi.Model.Reserva;
 
 import java.util.List;
 

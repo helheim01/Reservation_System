@@ -1,6 +1,6 @@
 package com.example.VueloDeBiazi.service;
 
-import com.example.VueloDeBiazi.entity.Aeropuerto;
+import com.example.VueloDeBiazi.Model.Aeropuerto;
 import java.util.List;
 
 public interface IAeropuertoService {

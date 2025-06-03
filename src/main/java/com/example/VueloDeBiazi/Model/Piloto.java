@@ -1,4 +1,4 @@
-package com.example.VueloDeBiazi.entity;
+package com.example.VueloDeBiazi.Model;
 import java.io.Serializable;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -11,11 +11,8 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-
-public class Consulta implements Serializable{
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
-    @OneToOne
-    private Vuelo vuelo;
+@DiscriminatorValue("Piloto")
+public class Piloto extends Persona implements Serializable{
+    @Basic
+    private int numeroPiloto;
 }

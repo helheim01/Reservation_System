@@ -1,6 +1,6 @@
 package com.example.VueloDeBiazi.repository;
 
-import com.example.VueloDeBiazi.entity.Vuelo;
+import com.example.VueloDeBiazi.Model.Vuelo;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;

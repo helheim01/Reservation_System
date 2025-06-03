@@ -1,6 +1,5 @@
-package com.example.VueloDeBiazi.entity;
+package com.example.VueloDeBiazi.Model;
 import java.io.Serializable;
-import java.util.Date;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -13,10 +12,15 @@ import lombok.Setter;
 @AllArgsConstructor
 @Entity
 
-public class Fecha implements Serializable{
+public class Tarifa implements Serializable{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    @Temporal(TemporalType.DATE)
-    private Date fecha;
+    @Basic
+    private int impuestoTarifa;
+    private int precioTarifa;
+    @Enumerated(EnumType.STRING)
+    private Clase claseTarifa;
+    @ManyToOne
+    private Vuelo vuelo;
 }

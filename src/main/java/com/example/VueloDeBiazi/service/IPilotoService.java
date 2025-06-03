@@ -1,6 +1,6 @@
 package com.example.VueloDeBiazi.service;
 
-import com.example.VueloDeBiazi.entity.Piloto;
+import com.example.VueloDeBiazi.Model.Piloto;
 
 import java.util.List;
 

@@ -30,10 +30,12 @@ const asientoSelect    = document.getElementById('asiento');
 const stepMenuOne      = document.querySelector('.formbold-step-menu1');
 const stepMenuTwo      = document.querySelector('.formbold-step-menu2');
 const stepMenuThree    = document.querySelector('.formbold-step-menu3');
+const stepMenuFour     = document.querySelector('.formbold-step-menu4');
 
 const stepOne          = document.querySelector('.formbold-form-step-1');
 const stepTwo          = document.querySelector('.formbold-form-step-2');
 const stepThree        = document.querySelector('.formbold-form-step-3');
+const stepFour         = document.querySelector('.formbold-form-step-4');
 
 const formSubmitBtn    = document.querySelector('.formbold-btn');
 const formBackBtn      = document.querySelector('.formbold-back-btn');
@@ -105,8 +107,6 @@ async function loadVuelos() {
   }
 }
 
-
-
 async function loadAsientos() {
   const vueloNum = vueloSelect.value;
   if (!vueloNum) return;
@@ -130,6 +130,33 @@ async function loadAsientos() {
   }
 }
 
+// Función para mostrar los datos de la reserva en la tabla
+async function mostrarDatosReserva() {
+  const tablaBody = document.getElementById('tablaArticulos');
+  
+  // Obtener nombres de ciudad y aerolínea basados en los IDs seleccionados
+  const ciudadNombre = ciudadSelect.options[ciudadSelect.selectedIndex]?.text || 'N/A';
+  const aerolineaNombre = aerolineaSelect.options[aerolineaSelect.selectedIndex]?.text || 'N/A';
+  const vueloTexto = vueloSelect.options[vueloSelect.selectedIndex]?.text || 'N/A';
+
+  // Crear fila con los datos
+  const fila = document.createElement('tr');
+  fila.innerHTML = `
+    <td>${consultaData.usuario.nombre}</td>
+    <td>${consultaData.usuario.apellido}</td>
+    <td>${vueloTexto}</td>
+    <td>${consultaData.asiento}</td>
+    <td>${ciudadNombre}</td>
+    <td>${aerolineaNombre}</td>
+    
+  `;
+  // <td>${fechaVuelo}</td>
+  
+  // Limpiar tabla y agregar la nueva fila
+  tablaBody.innerHTML = '';
+  tablaBody.appendChild(fila);
+}
+
 ciudadSelect.addEventListener('change', loadVuelos);
 aerolineaSelect.addEventListener('change', loadVuelos);
 vueloSelect.addEventListener('change', loadAsientos);
@@ -137,7 +164,24 @@ vueloSelect.addEventListener('change', loadAsientos);
 // --- Navegación Back ---
 formBackBtn.addEventListener('click', e => {
   e.preventDefault();
-  if (stepMenuTwo.classList.contains('active')) {
+  
+  if (stepMenuFour.classList.contains('active')) {
+    // Volver de paso 4 a paso 3
+    stepMenuFour.classList.remove('active');
+    stepMenuThree.classList.add('active');
+    stepFour.classList.remove('active');
+    stepThree.classList.add('active');
+    formSubmitBtn.textContent = 'Confirmar Reserva';
+    formSubmitBtn.style.display = 'inline-block';
+  } else if (stepMenuThree.classList.contains('active')) {
+    // Volver de paso 3 a paso 2
+    stepMenuThree.classList.remove('active');
+    stepMenuTwo.classList.add('active');
+    stepThree.classList.remove('active');
+    stepTwo.classList.add('active');
+    formSubmitBtn.textContent = 'Siguiente';
+  } else if (stepMenuTwo.classList.contains('active')) {
+    // Volver de paso 2 a paso 1
     stepMenuTwo.classList.remove('active');
     stepMenuOne.classList.add('active');
     stepTwo.classList.remove('active');
@@ -151,12 +195,12 @@ formBackBtn.addEventListener('click', e => {
 formSubmitBtn.addEventListener('click', async e => {
   e.preventDefault();
 
-  // PASO 1: crear Consulta
+  // PASO 1: crear Consulta
   if (stepMenuOne.classList.contains('active')) {
     consultaData.vuelo   = vueloSelect.value;
     consultaData.asiento = asientoSelect.value;
     if (!consultaData.vuelo || !consultaData.asiento) {
-      return alert('Completa todos los campos del Paso 1.');
+      return alert('Completa todos los campos del Paso 1.');
     }
 
     try {
@@ -174,7 +218,7 @@ formSubmitBtn.addEventListener('click', async e => {
       consultaData.idConsulta = saved.id;
       console.log('✅ Consulta guardada, ID=', consultaData.idConsulta);
 
-      // Avanzar a Paso 2
+      // Avanzar a Paso 2
       stepMenuOne.classList.remove('active');
       stepMenuTwo.classList.add('active');
       stepOne.classList.remove('active');
@@ -187,7 +231,7 @@ formSubmitBtn.addEventListener('click', async e => {
       alert('No se pudo guardar la consulta.');
     }
 
-  // PASO 2: datos usuario
+  // PASO 2: datos usuario
   } else if (stepMenuTwo.classList.contains('active')) {
     consultaData.usuario.nombre     = document.getElementById('firstname').value.trim();
     consultaData.usuario.apellido   = document.getElementById('lastname').value.trim();
@@ -199,7 +243,7 @@ formSubmitBtn.addEventListener('click', async e => {
         !consultaData.usuario.dni ||
         !consultaData.usuario.correo ||
         !consultaData.usuario.contraseña) {
-      return alert('Completa todos los campos del Paso 2.');
+      return alert('Completa todos los campos del Paso 2.');
     }
 
     stepMenuTwo.classList.remove('active');
@@ -209,12 +253,12 @@ formSubmitBtn.addEventListener('click', async e => {
     formBackBtn.classList.add('active');
     formSubmitBtn.textContent = 'Confirmar Reserva';
 
-  // PASO 3: tarjeta, reserva y usuario
+  // PASO 3: tarjeta, reserva y usuario - LUEGO IR AL PASO 4
   } else if (stepMenuThree.classList.contains('active')) {
     const numTarjeta = document.getElementById('cardNumber').value.trim();
     const tipoTarjeta = document.getElementById('cardType').value.trim().toUpperCase();
     if (!numTarjeta || !tipoTarjeta) {
-      return alert('Completa todos los campos del Paso 3.');
+      return alert('Completa todos los campos del Paso 3.');
     }
 
     try {
@@ -260,6 +304,19 @@ formSubmitBtn.addEventListener('click', async e => {
       await resU.json();
 
       alert('¡Reserva confirmada!');
+
+      // NAVEGAR AL PASO 4 Y MOSTRAR DATOS
+      stepMenuThree.classList.remove('active');
+      stepMenuFour.classList.add('active');
+      stepThree.classList.remove('active');
+      stepFour.classList.add('active');
+      
+      // Ocultar el botón de submit en el paso 4
+      formSubmitBtn.style.display = 'none';
+      
+      // Mostrar los datos en la tabla
+      mostrarDatosReserva();
+
     } catch (err) {
       console.error('Error finalizando flujo:', err);
       alert('Error guardando datos finales.');

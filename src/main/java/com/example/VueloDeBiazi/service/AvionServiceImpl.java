@@ -1,6 +1,6 @@
 package com.example.VueloDeBiazi.service;
 
-import com.example.VueloDeBiazi.entity.Avion;
+import com.example.VueloDeBiazi.Model.Avion;
 import com.example.VueloDeBiazi.repository.RepositoryAvion;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

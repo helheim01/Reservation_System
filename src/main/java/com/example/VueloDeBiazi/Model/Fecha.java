@@ -1,5 +1,8 @@
-package com.example.VueloDeBiazi.entity;
+package com.example.VueloDeBiazi.Model;
 import java.io.Serializable;
+import java.util.Date;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -12,16 +15,11 @@ import lombok.Setter;
 @AllArgsConstructor
 @Entity
 
-public class Asiento implements Serializable {
+public class Fecha implements Serializable{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    @Basic
-    private int filaAsiento;
-    private char letraAsiento;
-    @Enumerated(EnumType.STRING)
-    private Clase clase;
-    @ManyToOne
-    @JoinColumn(name = "avion_id")
-    private Avion avion;
+    @Temporal(TemporalType.DATE)
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
+    private Date fecha;
 }

@@ -1,12 +1,10 @@
 package com.example.VueloDeBiazi.controller;
-import com.example.VueloDeBiazi.entity.Ciudad;
-import com.example.VueloDeBiazi.repository.RepositoryCiudad;
+import com.example.VueloDeBiazi.Model.Ciudad;
 import com.example.VueloDeBiazi.service.ICiudadService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("/ciudades")

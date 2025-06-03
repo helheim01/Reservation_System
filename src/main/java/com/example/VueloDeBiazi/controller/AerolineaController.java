@@ -1,6 +1,6 @@
 package com.example.VueloDeBiazi.controller;
 
-import com.example.VueloDeBiazi.entity.Aerolinea;
+import com.example.VueloDeBiazi.Model.Aerolinea;
 import com.example.VueloDeBiazi.service.AerolineaServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -34,7 +34,6 @@ public class AerolineaController {
     public String update(@PathVariable Integer id, @RequestBody Aerolinea aerolinea) {
         return aerolineaService.updateAerolinea(id, aerolinea);
     }
-
     @DeleteMapping("/deleteAerolinea/{id}")
     public String delete(@PathVariable Integer id) {
         return aerolineaService.deleteAerolinea(id);

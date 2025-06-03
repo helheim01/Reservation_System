@@ -1,4 +1,4 @@
-package com.example.VueloDeBiazi.entity;
+package com.example.VueloDeBiazi.Model;
 
 public enum TipoTarjeta {
     DEBITO, CREDITO

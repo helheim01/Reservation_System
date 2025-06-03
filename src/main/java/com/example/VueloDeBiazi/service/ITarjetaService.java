@@ -1,6 +1,6 @@
 package com.example.VueloDeBiazi.service;
 
-import com.example.VueloDeBiazi.entity.Tarjeta;
+import com.example.VueloDeBiazi.Model.Tarjeta;
 import java.util.List;
 
 public interface ITarjetaService {

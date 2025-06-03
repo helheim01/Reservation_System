@@ -1,7 +1,6 @@
 package com.example.VueloDeBiazi.controller;
 
-import com.example.VueloDeBiazi.entity.Pago;
-import com.example.VueloDeBiazi.repository.RepositoryPago;
+import com.example.VueloDeBiazi.Model.Pago;
 import com.example.VueloDeBiazi.service.IPagoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;

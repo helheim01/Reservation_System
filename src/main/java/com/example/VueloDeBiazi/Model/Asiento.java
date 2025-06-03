@@ -1,4 +1,4 @@
-package com.example.VueloDeBiazi.entity;
+package com.example.VueloDeBiazi.Model;
 import java.io.Serializable;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -12,12 +12,16 @@ import lombok.Setter;
 @AllArgsConstructor
 @Entity
 
-public class Reserva implements Serializable{
+public class Asiento implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    @OneToOne
-    private Pago pago;
-    @OneToOne
-    private Vuelo vuelo;
+    @Basic
+    private int filaAsiento;
+    private char letraAsiento;
+    @Enumerated(EnumType.STRING)
+    private Clase clase;
+    @ManyToOne
+    @JoinColumn(name = "avion_id")
+    private Avion avion;
 }

@@ -1,5 +1,4 @@
-package com.example.VueloDeBiazi.entity;
-import java.io.Serializable;
+package com.example.VueloDeBiazi.Model;
 import java.util.ArrayList;
 import java.util.List;
 

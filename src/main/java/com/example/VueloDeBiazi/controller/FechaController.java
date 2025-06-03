@@ -1,7 +1,6 @@
 package com.example.VueloDeBiazi.controller;
 
-import com.example.VueloDeBiazi.entity.Fecha;
-import com.example.VueloDeBiazi.repository.RepositoryFecha;
+import com.example.VueloDeBiazi.Model.Fecha;
 import com.example.VueloDeBiazi.service.IFechaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
