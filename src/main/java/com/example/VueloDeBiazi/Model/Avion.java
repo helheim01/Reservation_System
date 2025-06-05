@@ -3,6 +3,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -22,6 +23,10 @@ public class Avion implements Serializable, Especificacion {
 
     @OneToMany(mappedBy = "avion", cascade = CascadeType.PERSIST, orphanRemoval = true)
     private List<Asiento> asientos = new ArrayList<>();
+
+    @OneToMany(mappedBy = "avion", fetch = FetchType.LAZY)
+    @JsonIgnore
+    private List<Vuelo> vuelos = new ArrayList<>();
 
     @Override
     public String tipoTurbina() {

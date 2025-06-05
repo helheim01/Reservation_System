@@ -33,18 +33,6 @@ public class VueloController {
         return vueloService.saveVuelo(vuelo);
     }
 
-    // Editar un vuelo
-    @PutMapping("/editarVuelo/{id}")
-    public String update(@PathVariable Integer id, @RequestBody Vuelo vuelo) {
-        return vueloService.updateVuelo(id, vuelo);
-    }
-
-    // Eliminar un vuelo
-    @DeleteMapping("/eliminarVuelo/{id}")
-    public String delete(@PathVariable Integer id) {
-        return vueloService.deleteVuelo(id);
-    }
-
     @GetMapping("/filtrar")
     public List<Vuelo> filtrarVuelos(
             @RequestParam Integer ciudad,
@@ -57,5 +45,19 @@ public class VueloController {
     public List<String> getAsientosByVuelo(@PathVariable("id") Integer vueloId) {
         return vueloService.getAsientosByVueloId(vueloId);
     }
+
+    // Editar un vuelo
+    @PutMapping("/editarVuelo/{id}")
+    public String update(@PathVariable Integer id, @RequestBody Vuelo vuelo) {
+        return vueloService.updateVuelo(id, vuelo);
+    }
+
+    // Eliminar un vuelo
+    @DeleteMapping("/eliminarVuelo/{id}")
+    public String delete(@PathVariable Integer id) {
+        return vueloService.deleteVuelo(id);
+    }
+
+
 }
 

@@ -82,28 +82,118 @@ async function loadAerolineas() {
 async function loadVuelos() {
   const ciudadId    = ciudadSelect.value;
   const aerolineaId = aerolineaSelect.value;
+  
   if (!ciudadId || !aerolineaId) {
     vueloSelect.innerHTML = '<option value="">Seleccione un vuelo</option>';
     return;
   }
+  
   try {
+    console.log(`🔍 Buscando vuelos para ciudad ${ciudadId} y aerolínea ${aerolineaId}`);
+    
+    // Primero hacer una prueba de debugging
+    const debugRes = await fetch(`http://localhost:8080/vuelos/debug/test-ciudad-aerolinea?ciudad=${ciudadId}&aerolinea=${aerolineaId}`);
+    if (debugRes.ok) {
+      const debugInfo = await debugRes.json();
+      console.log('📊 Info de debugging:', debugInfo);
+    }
+    
+    // Luego hacer la búsqueda real
     const res = await fetch(`http://localhost:8080/vuelos/filtrar?ciudad=${ciudadId}&aerolinea=${aerolineaId}`);
+    
+    if (!res.ok) {
+      throw new Error(`HTTP ${res.status}: ${res.statusText}`);
+    }
+    
     const vuelos = await res.json();
+    console.log('✈️ Vuelos recibidos:', vuelos);
 
     vueloSelect.innerHTML = '<option value="">Seleccione un vuelo</option>';
+    
     if (vuelos.length === 0) {
       vueloSelect.innerHTML = '<option value="">No hay vuelos disponibles</option>';
+      console.warn('⚠️ No se encontraron vuelos para los criterios seleccionados');
+      
+      // Si no hay vuelos, mostrar información adicional de debugging
+      console.log('🔧 Ejecutando debugging adicional...');
+      try {
+        const detalleRes = await fetch('http://localhost:8080/vuelos/debug/vuelos-detalle');
+        if (detalleRes.ok) {
+          const detalles = await detalleRes.json();
+          console.log('📋 Detalles de todos los vuelos:', detalles);
+        }
+      } catch (debugErr) {
+        console.error('Error en debugging:', debugErr);
+      }
+      
     } else {
       vuelos.forEach(v => {
         const opt = document.createElement('option');
-        opt.value = v.id;  // <-- usamos v.id, que es el @Id de Vuelo
-        opt.textContent = `Vuelo ${v.id} – ${v.avion?.modelo || 'Sin modelo'}`;
+        opt.value = v.id;
+        
+        // Texto mejorado con información del vuelo
+        let textoVuelo = `Vuelo ${v.id}`;
+        if (v.avion?.modelo) {
+          textoVuelo += ` - ${v.avion.modelo}`;
+        }
+        
+        // Mostrar información de aeropuertos si está disponible
+        if (v.aeropuertos && v.aeropuertos.length > 0) {
+          const nombresAeropuertos = v.aeropuertos
+            .map(a => a.nombreAeropuerto)
+            .join(' → ');
+          textoVuelo += ` (${nombresAeropuertos})`;
+        }
+        
+        opt.textContent = textoVuelo;
         vueloSelect.appendChild(opt);
       });
+      console.log(`✅ Se cargaron ${vuelos.length} vuelos exitosamente`);
     }
   } catch (err) {
-    console.error('Error cargando vuelos:', err);
+    console.error('💥 Error cargando vuelos:', err);
     vueloSelect.innerHTML = '<option value="">Error al cargar vuelos</option>';
+    
+    // Mostrar información adicional del error en consola
+    console.error('Detalles del error:', {
+      message: err.message,
+      stack: err.stack,
+      ciudadId: ciudadId,
+      aerolineaId: aerolineaId
+    });
+  }
+}
+
+// Función adicional para debugging manual
+async function debugVuelos() {
+  try {
+    console.log('🔧 Iniciando debugging manual...');
+    
+    const res = await fetch('http://localhost:8080/vuelos/debug/vuelos-detalle');
+    if (res.ok) {
+      const detalles = await res.json();
+      console.log('📊 Todos los vuelos con detalles:', detalles);
+      
+      // Análisis de los datos
+      console.log(`📈 Total de vuelos: ${detalles.length}`);
+      console.log(`📈 Vuelos con aerolínea: ${detalles.filter(v => v.aerolineaId).length}`);
+      console.log(`📈 Vuelos con aeropuertos: ${detalles.filter(v => v.cantidadAeropuertos > 0).length}`);
+      
+      // Mostrar aerolíneas únicas
+      const aerolineas = [...new Set(detalles.map(v => v.aerolineaNombre).filter(Boolean))];
+      console.log(`🏢 Aerolíneas disponibles: ${aerolineas.join(', ')}`);
+      
+      // Mostrar ciudades únicas
+      const ciudades = [...new Set(detalles.flatMap(v => 
+        v.aeropuertos.map(a => a.ciudadNombre).filter(Boolean)
+      ))];
+      console.log(`🏙️ Ciudades disponibles: ${ciudades.join(', ')}`);
+      
+    } else {
+      console.error('Error obteniendo detalles de debugging');
+    }
+  } catch (err) {
+    console.error('Error en debugging manual:', err);
   }
 }
 
@@ -279,7 +369,9 @@ formSubmitBtn.addEventListener('click', async e => {
       const resR = await fetch('http://localhost:8080/reservas/guardarReserva', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ consulta: { id: consultaData.idConsulta } })
+        body: JSON.stringify({ 
+          vuelo: { id: Number(consultaData.vuelo) } 
+        })
       });
       if (!resR.ok) throw new Error(`Reserva ${resR.status}`);
       const savedReserva = await resR.json();

@@ -2,6 +2,7 @@ package com.example.VueloDeBiazi.Model;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -18,16 +19,32 @@ public class Vuelo {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    @OneToOne
+
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "avion_id")
     private Avion avion;
-    @OneToMany
-    private List<Aeropuerto>aeropuertos=new ArrayList<>();
-    @OneToOne
+
+     @ManyToMany(fetch = FetchType.LAZY)
+     @JoinTable(
+         name = "vuelo_aeropuerto",
+         joinColumns = @JoinColumn(name = "vuelo_id"),
+         inverseJoinColumns = @JoinColumn(name = "aeropuerto_id")
+     )
+     private List<Aeropuerto> aeropuertos = new ArrayList<>();
+
+    @OneToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "piloto_id")
     private Piloto piloto;
-    @OneToOne
+
+    @OneToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "fecha_id")
     private Fecha fecha;
-    @OneToOne
+
+    @OneToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "aerolinea_id")
     private Aerolinea aerolinea;
-    @OneToMany(mappedBy = "vuelo")
-    private List<Tarifa>tarifas=new ArrayList<>();
+
+    @OneToMany(mappedBy = "vuelo", fetch = FetchType.LAZY)
+    @JsonIgnore
+    private List<Tarifa> tarifas = new ArrayList<>();
 }

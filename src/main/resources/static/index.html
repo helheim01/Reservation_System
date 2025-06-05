@@ -1,200 +1,318 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
+  <meta name="description" content="Sistema de reservas de vuelos - Formulario de consulta y registro">
+  <meta name="keywords" content="vuelos, reservas, aerolíneas, asientos">
+  <title>Sistema de Reservas de Vuelos</title>
   <link rel="stylesheet" href="style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 </head>
 <body>
   <div class="formbold-main-wrapper">
-  <div class="formbold-form-wrapper">
-    <form action="https://formbold.com/s/FORM_ID" method="POST">
-      <div class="formbold-steps">
-        <ul>
-          <li class="formbold-step-menu1 active">
-            <span>1</span>
-            Consulta
-          </li>
-          <li class="formbold-step-menu2">
-            <span>2</span>
-            Registro
-          </li>
-          <li class="formbold-step-menu3">
-            <span>3</span>
-            Confirmación
-          </li>
-          <li class="formbold-step-menu4">
-            <span>4</span>
-            Ver Artículos
-          </li>
+    <div class="formbold-form-wrapper">
+      <header class="form-header">
+        <h1>Sistema de Reservas</h1>
+        <p>Complete los siguientes pasos para realizar su reserva</p>
+      </header>
+
+      <form action="https://formbold.com/s/FORM_ID" method="POST" novalidate>
+        <div class="formbold-steps" data-step="1">
+          <ul>
+            <li class="formbold-step-menu1 active">
+              <span>1</span>
+              <div class="step-text">
+                <strong>Consulta</strong>
+                <small>Seleccione su vuelo</small>
+              </div>
+            </li>
+            <li class="formbold-step-menu2">
+              <span>2</span>
+              <div class="step-text">
+                <strong>Registro</strong>
+                <small>Datos personales</small>
+              </div>
+            </li>
+            <li class="formbold-step-menu3">
+              <span>3</span>
+              <div class="step-text">
+                <strong>Confirmación</strong>
+                <small>Método de pago</small>
+              </div>
+            </li>
+            <li class="formbold-step-menu4">
+              <span>4</span>
+              <div class="step-text">
+                <strong>Ver Artículos</strong>
+                <small>Resumen final</small>
+              </div>
+            </li>
+          </ul>
+        </div>
+
+        <div class="formbold-form-step-1 active">
+          <div class="step-title">
+            <h2>Paso 1: Selección de Vuelo</h2>
+            <p>Elija su destino y detalles del vuelo</p>
+          </div>
           
-        </ul>
-      </div>
-
-      <div class="formbold-form-step-1 active">
-        <div class="formbold-input-flex">
-          <div>
-            <label for="ciudad" class="formbold-form-label">Ciudad</label>
-            <select id="ciudad" name="ciudad" class="formbold-form-input">
-              <option value="">Seleccione una ciudad</option>
-            </select>
-          </div>
-
-          <div>
-            <label for="aerolinea" class="formbold-form-label">Aerolínea</label>
-            <select id="aerolinea" name="aerolinea" class="formbold-form-input">
-              <option value="">Seleccione una aerolínea</option>
-            </select>
-          </div>
-        </div>
-
-        <div class="formbold-input-flex">
-          <div>
-            <label for="vuelo" class="formbold-form-label">Vuelo</label>
-            <select id="vuelo" name="vuelo" class="formbold-form-input">
-              <option value="">Seleccione un vuelo</option>
-            </select>
-          </div>
-
-          <div>
-            <label for="asiento" class="formbold-form-label">Asiento</label>
-            <select id="asiento" name="asiento" class="formbold-form-input">
-              <option value="">Seleccione un asiento</option>
-            </select>
-          </div>
-        </div>
-      </div>
-
-      <div class="formbold-form-step-2">
-        <div class="formbold-input-flex">
-          <div>
-            <label for="firstname" class="formbold-form-label">Nombre</label>
-            <input
-              type="text"
-              name="firstname"
-              placeholder="Andrio"
-              id="firstname"
-              class="formbold-form-input"
-            />
-          </div>
-          <div>
-            <label for="lastname" class="formbold-form-label">Apellido</label>
-            <input
-              type="text"
-              name="lastname"
-              placeholder="Dolee"
-              id="lastname"
-              class="formbold-form-input"
-            />
-          </div>
-          <div>
-            <label for="dni" class="formbold-form-label">DNI</label>
-            <input
-              type="text"
-              name="dni"
-              id="dni"
-              placeholder="12345678"
-              class="formbold-form-input"
-            />
-          </div>
-        </div>
-
-        <div class="formbold-input-flex">
-          <div>
-            <label for="email" class="formbold-form-label">Email</label>
-            <input
-              type="email"
-              name="email"
-              placeholder="example@mail.com"
-              id="email"
-              class="formbold-form-input"
-            />
-          </div>
-          <div>
-            <label for="password" class="formbold-form-label">Contraseña</label>
-            <input
-              type="password"
-              name="password"
-              placeholder="password"
-              id="password"
-              class="formbold-form-input"
-            />
-          </div>
-        </div>
-      </div>
-
-      <div class="formbold-form-step-3">
-        <div class="formbold-form-confirm">
           <div class="formbold-input-flex">
-            <div>
-              <label for="cardNumber" class="formbold-form-label">Número de Tarjeta</label>
+            <div class="input-group">
+              <label for="ciudad" class="formbold-form-label">
+                <span class="label-icon">🏙️</span>
+                Ciudad de Destino
+              </label>
+              <select id="ciudad" name="ciudad" class="formbold-form-input" required>
+                <option value="">Seleccione una ciudad</option>
+              </select>
+              <div class="input-helper">Escoja su ciudad de destino</div>
+            </div>
+
+            <div class="input-group">
+              <label for="aerolinea" class="formbold-form-label">
+                <span class="label-icon">✈️</span>
+                Aerolínea Preferida
+              </label>
+              <select id="aerolinea" name="aerolinea" class="formbold-form-input" required>
+                <option value="">Seleccione una aerolínea</option>
+              </select>
+              <div class="input-helper">Seleccione su aerolínea de preferencia</div>
+            </div>
+          </div>
+
+          <div class="formbold-input-flex">
+            <div class="input-group">
+              <label for="vuelo" class="formbold-form-label">
+                <span class="label-icon">🛫</span>
+                Número de Vuelo
+              </label>
+              <select id="vuelo" name="vuelo" class="formbold-form-input" required>
+                <option value="">Seleccione un vuelo</option>
+              </select>
+              <div class="input-helper">Elija el vuelo que más le convenga</div>
+            </div>
+
+            <div class="input-group">
+              <label for="asiento" class="formbold-form-label">
+                <span class="label-icon">💺</span>
+                Asiento Preferido
+              </label>
+              <select id="asiento" name="asiento" class="formbold-form-input" required>
+                <option value="">Seleccione un asiento</option>
+              </select>
+              <div class="input-helper">Escoja su asiento preferido</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="formbold-form-step-2">
+          <div class="step-title">
+            <h2>Paso 2: Información Personal</h2>
+            <p>Complete sus datos para la reserva</p>
+          </div>
+
+          <div class="formbold-input-flex">
+            <div class="input-group">
+              <label for="firstname" class="formbold-form-label">
+                <span class="label-icon">👤</span>
+                Nombre
+              </label>
               <input
                 type="text"
-                name="cardNumber"
-                id="cardNumber"
-                placeholder="1234 5678 9012 3456"
+                name="firstname"
+                placeholder="Ingrese su nombre"
+                id="firstname"
                 class="formbold-form-input"
+                required
+                autocomplete="given-name"
               />
+              <div class="input-helper">Como aparece en su documento</div>
             </div>
-            <div>
-              <label for="cardType" class="formbold-form-label">Tipo de Tarjeta</label>
-              <select name="cardType" id="cardType" class="formbold-form-input">
-                <option value="">Seleccionar tipo</option>
-                <option value="DEBITO">Débito</option>
-                <option value="CREDITO">Crédito</option>
-              </select>
+            
+            <div class="input-group">
+              <label for="lastname" class="formbold-form-label">
+                <span class="label-icon">👤</span>
+                Apellido
+              </label>
+              <input
+                type="text"
+                name="lastname"
+                placeholder="Ingrese su apellido"
+                id="lastname"
+                class="formbold-form-input"
+                required
+                autocomplete="family-name"
+              />
+              <div class="input-helper">Como aparece en su documento</div>
+            </div>
+            
+            <div class="input-group">
+              <label for="dni" class="formbold-form-label">
+                <span class="label-icon">🆔</span>
+                DNI
+              </label>
+              <input
+                type="text"
+                name="dni"
+                id="dni"
+                placeholder="12345678"
+                class="formbold-form-input"
+                required
+                pattern="[0-9]{8}"
+                maxlength="8"
+              />
+              <div class="input-helper">8 dígitos sin puntos ni espacios</div>
+            </div>
+          </div>
+
+          <div class="formbold-input-flex">
+            <div class="input-group">
+              <label for="email" class="formbold-form-label">
+                <span class="label-icon">📧</span>
+                Correo Electrónico
+              </label>
+              <input
+                type="email"
+                name="email"
+                placeholder="ejemplo@correo.com"
+                id="email"
+                class="formbold-form-input"
+                required
+                autocomplete="email"
+              />
+              <div class="input-helper">Recibirá la confirmación aquí</div>
+            </div>
+            
+            <div class="input-group">
+              <label for="password" class="formbold-form-label">
+                <span class="label-icon">🔒</span>
+                Contraseña
+              </label>
+              <input
+                type="password"
+                name="password"
+                placeholder="Ingrese una contraseña segura"
+                id="password"
+                class="formbold-form-input"
+                required
+                minlength="8"
+                autocomplete="new-password"
+              />
+              <div class="input-helper">Mínimo 8 caracteres</div>
             </div>
           </div>
         </div>
-      </div>
 
-      <div class="formbold-form-step-4">
-        <div class="container">
-          <h1>Lista de Reservas</h1>
-          <table>
-            <thead>
-              <tr>
-                <th>Nombre Usuario</th>
-                <th>Apellido Usuario</th>
-                <th>Vuelo</th>
-                <th>Asiento</th>
-                <th>Ciudad</th>
-                <th>Aerolinea</th>
-              </tr>
-            </thead>
-            <tbody id="tablaArticulos">
-            </tbody>
-          </table>
+        <div class="formbold-form-step-3">
+          <div class="step-title">
+            <h2>Paso 3: Información de Pago</h2>
+            <p>Ingrese los datos de su tarjeta</p>
+          </div>
+
+          <div class="formbold-form-confirm">
+            <div class="formbold-input-flex">
+              <div class="input-group">
+                <label for="cardNumber" class="formbold-form-label">
+                  <span class="label-icon">💳</span>
+                  Número de Tarjeta
+                </label>
+                <input
+                  type="text"
+                  name="cardNumber"
+                  id="cardNumber"
+                  placeholder="1234 5678 9012 3456"
+                  class="formbold-form-input"
+                  required
+                  pattern="[0-9\s]{13,19}"
+                  maxlength="19"
+                  autocomplete="cc-number"
+                />
+                <div class="input-helper">16 dígitos de su tarjeta</div>
+              </div>
+              
+              <div class="input-group">
+                <label for="cardType" class="formbold-form-label">
+                  <span class="label-icon">🏦</span>
+                  Tipo de Tarjeta
+                </label>
+                <select name="cardType" id="cardType" class="formbold-form-input" required>
+                  <option value="">Seleccionar tipo</option>
+                  <option value="DEBITO">Tarjeta de Débito</option>
+                  <option value="CREDITO">Tarjeta de Crédito</option>
+                </select>
+                <div class="input-helper">Tipo de tarjeta a utilizar</div>
+              </div>
+            </div>
+          </div>
         </div>
-      </div>
 
-      <div class="formbold-form-btn-wrapper">
-        <button type="button" class="formbold-back-btn">
-          Back
-        </button>
+        <div class="formbold-form-step-4">
+          <div class="step-title">
+            <h2>Paso 4: Resumen de Reservas</h2>
+            <p>Revise todas las reservas realizadas</p>
+          </div>
 
-        <button type="submit" class="formbold-btn">
-          Next Step
-          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <g clip-path="url(#clip0_1675_1807)">
-              <path d="M10.7814 7.33312L7.20541 3.75712L8.14808 2.81445L13.3334 7.99979L8.14808 13.1851L7.20541 12.2425L10.7814 8.66645H2.66675V7.33312H10.7814Z" fill="white"/>
-            </g>
-            <defs>
-              <clipPath id="clip0_1675_1807">
-                <rect width="16" height="16" fill="white"/>
-              </clipPath>
-            </defs>
-          </svg>
-        </button>
-      </div>
-    </form>
+          <div class="container">
+            <h3>Lista de Reservas</h3>
+            <div class="table-wrapper">
+              <table>
+                <thead>
+                  <tr>
+                    <th>Nombre Usuario</th>
+                    <th>Apellido Usuario</th>
+                    <th>Vuelo</th>
+                    <th>Asiento</th>
+                    <th>Ciudad</th>
+                    <th>Aerolinea</th>
+                  </tr>
+                </thead>
+                <tbody id="tablaArticulos">
+                  <!-- Los datos se cargarán dinámicamente -->
+                </tbody>
+              </table>
+            </div>
+            
+            <div class="table-empty" style="display: none;">
+              <p>No hay reservas para mostrar</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="formbold-form-btn-wrapper">
+          <button type="button" class="formbold-back-btn">
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <g clip-path="url(#clip0_back)">
+                <path d="M5.2186 7.33312L8.79459 3.75712L7.85192 2.81445L2.66658 7.99979L7.85192 13.1851L8.79459 12.2425L5.2186 8.66645H13.3333V7.33312H5.2186Z" fill="currentColor"/>
+              </g>
+              <defs>
+                <clipPath id="clip0_back">
+                  <rect width="16" height="16" fill="white"/>
+                </clipPath>
+              </defs>
+            </svg>
+            Anterior
+          </button>
+
+          <button type="submit" class="formbold-btn">
+            Siguiente Paso
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <g clip-path="url(#clip0_1675_1807)">
+                <path d="M10.7814 7.33312L7.20541 3.75712L8.14808 2.81445L13.3334 7.99979L8.14808 13.1851L7.20541 12.2425L10.7814 8.66645H2.66675V7.33312H10.7814Z" fill="currentColor"/>
+              </g>
+              <defs>
+                <clipPath id="clip0_1675_1807">
+                  <rect width="16" height="16" fill="white"/>
+                </clipPath>
+              </defs>
+            </svg>
+          </button>
+        </div>
+      </form>
+    </div>
   </div>
-</div>
 
-
-
-
-<script src="script.js"></script>
+  <script src="script.js"></script>
 </body>
 </html>
