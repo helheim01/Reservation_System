@@ -43,7 +43,7 @@ public class VueloServiceImpl implements IVueloService {
         if (vuelo == null || vuelo.getAvion() == null) {
             return Collections.emptyList();
         }
-        // Mapear cada Asiento a su número (suponiendo getter getNumero())
+        //Mapeo cada Asiento a su número
         List<Asiento> asientos = vuelo.getAvion().getAsientos();
         return asientos.stream()
                 .map(a -> String.valueOf(a.getLetraAsiento()))

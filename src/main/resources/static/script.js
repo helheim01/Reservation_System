@@ -1,4 +1,4 @@
-// --- Variables globales ---
+// --- Creo las variables globales ---
 let consultaData = {
   ciudad:    null,
   aerolinea: null,
@@ -40,13 +40,13 @@ const stepFour         = document.querySelector('.formbold-form-step-4');
 const formSubmitBtn    = document.querySelector('.formbold-btn');
 const formBackBtn      = document.querySelector('.formbold-back-btn');
 
-// --- Inicialización ---
+// --- Inicializo ---
 document.addEventListener('DOMContentLoaded', () => {
   loadCiudades();
   loadAerolineas();
 });
 
-// --- Funciones de carga ---
+// --- Declaro las funciones de carga ---
 async function loadCiudades() {
   try {
     const res = await fetch('http://localhost:8080/ciudades/ciudades');
@@ -91,14 +91,14 @@ async function loadVuelos() {
   try {
     console.log(`🔍 Buscando vuelos para ciudad ${ciudadId} y aerolínea ${aerolineaId}`);
     
-    // Primero hacer una prueba de debugging
+    //Tuve q hacer una prueba de debugging para ver los errores q me daba
     const debugRes = await fetch(`http://localhost:8080/vuelos/debug/test-ciudad-aerolinea?ciudad=${ciudadId}&aerolinea=${aerolineaId}`);
     if (debugRes.ok) {
       const debugInfo = await debugRes.json();
       console.log('📊 Info de debugging:', debugInfo);
     }
     
-    // Luego hacer la búsqueda real
+    //Si funionó lo anterior, hago la búsqueda real
     const res = await fetch(`http://localhost:8080/vuelos/filtrar?ciudad=${ciudadId}&aerolinea=${aerolineaId}`);
     
     if (!res.ok) {
@@ -114,7 +114,7 @@ async function loadVuelos() {
       vueloSelect.innerHTML = '<option value="">No hay vuelos disponibles</option>';
       console.warn('⚠️ No se encontraron vuelos para los criterios seleccionados');
       
-      // Si no hay vuelos, mostrar información adicional de debugging
+      // Si no hay vuelos, muestro información adicional de debugging
       console.log('🔧 Ejecutando debugging adicional...');
       try {
         const detalleRes = await fetch('http://localhost:8080/vuelos/debug/vuelos-detalle');
@@ -131,13 +131,13 @@ async function loadVuelos() {
         const opt = document.createElement('option');
         opt.value = v.id;
         
-        // Texto mejorado con información del vuelo
+        // Mejoré el texto con la información del vuelo
         let textoVuelo = `Vuelo ${v.id}`;
         if (v.avion?.modelo) {
           textoVuelo += ` - ${v.avion.modelo}`;
         }
         
-        // Mostrar información de aeropuertos si está disponible
+        // Muestro información de aeropuertos si está disponible
         if (v.aeropuertos && v.aeropuertos.length > 0) {
           const nombresAeropuertos = v.aeropuertos
             .map(a => a.nombreAeropuerto)
@@ -154,7 +154,7 @@ async function loadVuelos() {
     console.error('💥 Error cargando vuelos:', err);
     vueloSelect.innerHTML = '<option value="">Error al cargar vuelos</option>';
     
-    // Mostrar información adicional del error en consola
+    // Muestro información adicional del error en consola
     console.error('Detalles del error:', {
       message: err.message,
       stack: err.stack,
@@ -164,7 +164,7 @@ async function loadVuelos() {
   }
 }
 
-// Función adicional para debugging manual
+// Hago una función adicional para el debugging manual
 async function debugVuelos() {
   try {
     console.log('🔧 Iniciando debugging manual...');
@@ -174,16 +174,16 @@ async function debugVuelos() {
       const detalles = await res.json();
       console.log('📊 Todos los vuelos con detalles:', detalles);
       
-      // Análisis de los datos
+      // Analizo los datos
       console.log(`📈 Total de vuelos: ${detalles.length}`);
       console.log(`📈 Vuelos con aerolínea: ${detalles.filter(v => v.aerolineaId).length}`);
       console.log(`📈 Vuelos con aeropuertos: ${detalles.filter(v => v.cantidadAeropuertos > 0).length}`);
       
-      // Mostrar aerolíneas únicas
+      // Muestro las aerolíneas únicas
       const aerolineas = [...new Set(detalles.map(v => v.aerolineaNombre).filter(Boolean))];
       console.log(`🏢 Aerolíneas disponibles: ${aerolineas.join(', ')}`);
       
-      // Mostrar ciudades únicas
+      // Muestro las ciudades únicas
       const ciudades = [...new Set(detalles.flatMap(v => 
         v.aeropuertos.map(a => a.ciudadNombre).filter(Boolean)
       ))];
@@ -220,16 +220,16 @@ async function loadAsientos() {
   }
 }
 
-// Función para mostrar los datos de la reserva en la tabla
+// Hice una función para mostrar los datos de la reserva en la tabla
 async function mostrarDatosReserva() {
   const tablaBody = document.getElementById('tablaArticulos');
   
-  // Obtener nombres de ciudad y aerolínea basados en los IDs seleccionados
+  //Obtengo los nombres de la ciudad y la aerolínea en base a los IDs seleccionados
   const ciudadNombre = ciudadSelect.options[ciudadSelect.selectedIndex]?.text || 'N/A';
   const aerolineaNombre = aerolineaSelect.options[aerolineaSelect.selectedIndex]?.text || 'N/A';
   const vueloTexto = vueloSelect.options[vueloSelect.selectedIndex]?.text || 'N/A';
 
-  // Crear fila con los datos
+  // Creo la fila con los datos
   const fila = document.createElement('tr');
   fila.innerHTML = `
     <td>${consultaData.usuario.nombre}</td>
@@ -242,7 +242,7 @@ async function mostrarDatosReserva() {
   `;
   // <td>${fechaVuelo}</td>
   
-  // Limpiar tabla y agregar la nueva fila
+  // Limpio tabla y agrego la nueva fila
   tablaBody.innerHTML = '';
   tablaBody.appendChild(fila);
 }
@@ -251,12 +251,11 @@ ciudadSelect.addEventListener('change', loadVuelos);
 aerolineaSelect.addEventListener('change', loadVuelos);
 vueloSelect.addEventListener('change', loadAsientos);
 
-// --- Navegación Back ---
+// --- Esto es para navegar hacia atrás entre secciones, pero la verdad fue una pesima idea ---
 formBackBtn.addEventListener('click', e => {
   e.preventDefault();
   
   if (stepMenuFour.classList.contains('active')) {
-    // Volver de paso 4 a paso 3
     stepMenuFour.classList.remove('active');
     stepMenuThree.classList.add('active');
     stepFour.classList.remove('active');
@@ -264,14 +263,12 @@ formBackBtn.addEventListener('click', e => {
     formSubmitBtn.textContent = 'Confirmar Reserva';
     formSubmitBtn.style.display = 'inline-block';
   } else if (stepMenuThree.classList.contains('active')) {
-    // Volver de paso 3 a paso 2
     stepMenuThree.classList.remove('active');
     stepMenuTwo.classList.add('active');
     stepThree.classList.remove('active');
     stepTwo.classList.add('active');
     formSubmitBtn.textContent = 'Siguiente';
   } else if (stepMenuTwo.classList.contains('active')) {
-    // Volver de paso 2 a paso 1
     stepMenuTwo.classList.remove('active');
     stepMenuOne.classList.add('active');
     stepTwo.classList.remove('active');
@@ -281,11 +278,11 @@ formBackBtn.addEventListener('click', e => {
   }
 });
 
-// --- Next / Submit ---
+// --- Al enviar:  ---
 formSubmitBtn.addEventListener('click', async e => {
   e.preventDefault();
 
-  // PASO 1: crear Consulta
+  // PASO 1: Se crea la consulta
   if (stepMenuOne.classList.contains('active')) {
     consultaData.vuelo   = vueloSelect.value;
     consultaData.asiento = asientoSelect.value;
@@ -303,12 +300,12 @@ formSubmitBtn.addEventListener('click', async e => {
       });
       if (!res.ok) throw new Error(`HTTP ${res.status}`);
 
-      //Recibo JSON con la Consulta guardada
+      //Recibo el JSON con la consulta guardada
       const saved = await res.json();
       consultaData.idConsulta = saved.id;
       console.log('✅ Consulta guardada, ID=', consultaData.idConsulta);
 
-      // Avanzar a Paso 2
+      //Avanzo al paso 2
       stepMenuOne.classList.remove('active');
       stepMenuTwo.classList.add('active');
       stepOne.classList.remove('active');
@@ -321,7 +318,7 @@ formSubmitBtn.addEventListener('click', async e => {
       alert('No se pudo guardar la consulta.');
     }
 
-  // PASO 2: Datos del usuario
+  // PASO 2: Procesar los datos del usuario
   } else if (stepMenuTwo.classList.contains('active')) {
     consultaData.usuario.nombre     = document.getElementById('firstname').value.trim();
     consultaData.usuario.apellido   = document.getElementById('lastname').value.trim();
@@ -343,7 +340,7 @@ formSubmitBtn.addEventListener('click', async e => {
     formBackBtn.classList.add('active');
     formSubmitBtn.textContent = 'Confirmar Reserva';
 
-  // PASO 3: Tarjeta, Reserva y Usuario
+  // PASO 3: Procesar la tarjeta, la reserva y el suario
   } else if (stepMenuThree.classList.contains('active')) {
     const numTarjeta = document.getElementById('cardNumber').value.trim();
     const tipoTarjeta = document.getElementById('cardType').value.trim().toUpperCase();

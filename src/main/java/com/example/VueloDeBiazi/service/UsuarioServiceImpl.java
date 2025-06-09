@@ -25,7 +25,7 @@ public class UsuarioServiceImpl implements IUsuarioService {
 
     @Override
     public Usuario saveUsuario(Usuario u) {
-        return repositoryUsuario.save(u);          // devuelve la entidad guardada con id
+        return repositoryUsuario.save(u);          //Al hacerlo así, me devuelve la entidad guardada con id
     }
 
     @Override
@@ -37,7 +37,6 @@ public class UsuarioServiceImpl implements IUsuarioService {
             existente.setTarjetas(usuario.getTarjetas());
             existente.setConsultas(usuario.getConsultas());
             existente.setReservas(usuario.getReservas());
-            // También podrías actualizar los atributos heredados de Persona si corresponde
             repositoryUsuario.save(existente);
             return "USUARIO ACTUALIZADO";
         }

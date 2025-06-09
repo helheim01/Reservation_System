@@ -9,7 +9,7 @@ import java.util.List;
 
 public interface RepositoryVuelo extends JpaRepository<Vuelo, Integer> {
 
-    // Query principal para filtrar por ciudad y aerolínea
+    //Hice una query principal para filtrar por ciudad y aerolínea
     @Query("""
         SELECT DISTINCT v 
         FROM Vuelo v 
@@ -22,7 +22,7 @@ public interface RepositoryVuelo extends JpaRepository<Vuelo, Integer> {
             @Param("aerolineaId") Integer aerolineaId
     );
 
-    // Query alternativa usando SQL nativo (por si la JPQL falla)
+    //Tuve que hacer otra query con SQL nativo (por si la anterior fallaba xd)
     @Query(value = """
         SELECT DISTINCT v.* 
         FROM vuelo v 
@@ -37,11 +37,9 @@ public interface RepositoryVuelo extends JpaRepository<Vuelo, Integer> {
             @Param("aerolineaId") Integer aerolineaId
     );
 
-    // Para debugging - solo por aerolínea
     @Query("SELECT v FROM Vuelo v WHERE v.aerolinea.id = :aerolineaId")
     List<Vuelo> findByAerolineaId(@Param("aerolineaId") Integer aerolineaId);
 
-    // Para debugging - traer todos los vuelos con sus relaciones
     @Query("""
         SELECT DISTINCT v 
         FROM Vuelo v 
@@ -51,7 +49,7 @@ public interface RepositoryVuelo extends JpaRepository<Vuelo, Integer> {
     """)
     List<Vuelo> findAllWithDetails();
 
-    // Query para obtener vuelos por ciudad (sin filtro de aerolínea)
+    //Esta query es para tener los vuelos por ciudad (sin filtro de aerolínea)
     @Query("""
         SELECT DISTINCT v 
         FROM Vuelo v 
