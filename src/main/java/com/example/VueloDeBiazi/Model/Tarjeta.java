@@ -13,7 +13,7 @@ import lombok.Setter;
 @Entity
 
 public class Tarjeta extends Pago implements Serializable{
-    private int numeroTarjeta;
+    private long numeroTarjeta;
     @Enumerated(EnumType.STRING)
     private TipoTarjeta tipoTarjeta;
 }

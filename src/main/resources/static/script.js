@@ -303,7 +303,7 @@ formSubmitBtn.addEventListener('click', async e => {
       });
       if (!res.ok) throw new Error(`HTTP ${res.status}`);
 
-      // Ahora recibimos JSON con la Consulta guardada
+      //Recibo JSON con la Consulta guardada
       const saved = await res.json();
       consultaData.idConsulta = saved.id;
       console.log('✅ Consulta guardada, ID=', consultaData.idConsulta);
@@ -321,7 +321,7 @@ formSubmitBtn.addEventListener('click', async e => {
       alert('No se pudo guardar la consulta.');
     }
 
-  // PASO 2: datos usuario
+  // PASO 2: Datos del usuario
   } else if (stepMenuTwo.classList.contains('active')) {
     consultaData.usuario.nombre     = document.getElementById('firstname').value.trim();
     consultaData.usuario.apellido   = document.getElementById('lastname').value.trim();
@@ -343,7 +343,7 @@ formSubmitBtn.addEventListener('click', async e => {
     formBackBtn.classList.add('active');
     formSubmitBtn.textContent = 'Confirmar Reserva';
 
-  // PASO 3: tarjeta, reserva y usuario - LUEGO IR AL PASO 4
+  // PASO 3: Tarjeta, Reserva y Usuario
   } else if (stepMenuThree.classList.contains('active')) {
     const numTarjeta = document.getElementById('cardNumber').value.trim();
     const tipoTarjeta = document.getElementById('cardType').value.trim().toUpperCase();
@@ -352,7 +352,7 @@ formSubmitBtn.addEventListener('click', async e => {
     }
 
     try {
-      // Guardar tarjeta
+      // Guardo la tarjeta
       const resT = await fetch('http://localhost:8080/tarjetas/guardarTarjeta', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -365,7 +365,7 @@ formSubmitBtn.addEventListener('click', async e => {
       if (!resT.ok) throw new Error(`Tarjeta ${resT.status}`);
       const savedCard = await resT.json();
 
-      // Guardar reserva
+      // Guardo la reserva
       const resR = await fetch('http://localhost:8080/reservas/guardarReserva', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -376,7 +376,7 @@ formSubmitBtn.addEventListener('click', async e => {
       if (!resR.ok) throw new Error(`Reserva ${resR.status}`);
       const savedReserva = await resR.json();
 
-      // Guardar usuario
+      // Guardo el usuario
       const payloadU = {
         dni: consultaData.usuario.dni,
         nombre: consultaData.usuario.nombre,
@@ -397,16 +397,15 @@ formSubmitBtn.addEventListener('click', async e => {
 
       alert('¡Reserva confirmada!');
 
-      // NAVEGAR AL PASO 4 Y MOSTRAR DATOS
+      //Voy al paso 4
       stepMenuThree.classList.remove('active');
       stepMenuFour.classList.add('active');
       stepThree.classList.remove('active');
       stepFour.classList.add('active');
-      
-      // Ocultar el botón de submit en el paso 4
+      //Tuve que ocultar el boton de enviar por el html
       formSubmitBtn.style.display = 'none';
       
-      // Mostrar los datos en la tabla
+      //Muestro los datos de la reserva en la tabla
       mostrarDatosReserva();
 
     } catch (err) {
