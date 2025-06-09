@@ -21,7 +21,6 @@ Antes de ejecutar el proyecto, asegurate de tener instalado:
 | **Java** | 17 | 21 LTS |
 | **Maven** | 3.6.0 | 3.9.x |
 | **MySQL Server** | 8.0 | 8.0.x |
-| **RAM disponible** | 2GB | 4GB |
 
 ### Opcional pero recomendado:
 - **phpMyAdmin** o **MySQL Workbench** (gestión visual de BD)
