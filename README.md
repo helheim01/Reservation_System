@@ -16,11 +16,11 @@ Un sistema web completo desarrollado en **Spring Boot** para la gestión de rese
 
 Antes de ejecutar el proyecto, asegurate de tener instalado:
 
-| Componente | Versión mínima | Recomendada |
-|------------|----------------|-------------|
-| **Java** | 17 | 21 LTS |
-| **Maven** | 3.6.0 | 3.9.x |
-| **MySQL Server** | 8.0 | 8.0.x |
+| Componente | Versión Recomendada |
+|------------|----------------|
+| **Java** | 17 |
+| **Maven** | 3.6.0 |
+| **MySQL Server** | 8.0 |
 
 ### Opcional pero recomendado:
 - **phpMyAdmin** o **MySQL Workbench** (gestión visual de BD)
